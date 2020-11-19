@@ -1,9 +1,9 @@
 #include "shell.h"
 /**
- * _strcpy - copies  src to  dest.
- * @dest:char
- * @src:char
- * Return:char
+ * _strcpy - Copie Source To Destination Char
+ * @dest:Destination
+ * @src:Source
+ * Return: Copie Of Char *
  */
 char *_strcpy(char *dest, char *src)
 {
@@ -19,10 +19,10 @@ dest[i] = '\0';
 return (dest);
 }
 /**
- * _strcat - concat 2 string
- * @dest:char
- * @src:char
- * Return:char
+ * _strcat - Concat Two String
+ * @dest:First String
+ * @src:Second String
+ * Return:First String + Second String Char *
  */
 char *_strcat(char *dest, char *src)
 {
@@ -43,10 +43,10 @@ char *_strcat(char *dest, char *src)
 	return (s);
 }
 /**
- * _strchr - locate a character in a string
- * @s:string
- * @c:char
- * Return:pointer to char*
+ * _strchr - Locate Charactere In String
+ * @s:String Search In
+ * @c:Char To Search For
+ * Return: Pointer To Char*
  */
 char *_strchr(char *s, char c)
 {
@@ -62,17 +62,19 @@ char *_strchr(char *s, char c)
 return (s);
 }
 /**
- * _strncmp - compares (n) amount of characters of two strings.
- * @s1: A string.
- * @s2: A string.
- * @n: Amount of characters to compare.
+ * _strncmp - Compare Amount (n) Of Characters Of Two Strings.
+ * @s1: A String.
+ * @s2: A String.
+ * @n: Amount Of Characters To Compare.
  *
- * Return: 1 if the strings don't match otherwise return 0.
+ * Return: 1 If The Strings Don't Match Otherwise 0
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
 
+	if (s1 == NULL)
+		return (-1);
 	for (i = 0; i < n && s2[i]; i++)
 	{
 		if (s1[i] != s2[i])
@@ -83,28 +85,26 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 /**
- * _strdup - aloc new size for char
- *
- * @str:char*
- * Return: char*
+ * _strdup - Duplicate A String
+ * @str:String
+ * Return: Duplicate String Failed Null
  */
 char *_strdup(char *str)
 {
-	char *dupl;
+	size_t len, i;
+	char *str2;
 
-	if (str == NULL)
+	len = _strlen(str);
+	str2 = malloc(sizeof(char) * (len + 1));
+	if (!str2)
 	{
-		free(str);
 		return (NULL);
 	}
 
-	dupl = malloc(_strlen(str) + 1);
-	if (dupl == NULL)
+	for (i = 0; i <= len; i++)
 	{
-		free(dupl);
-		return (NULL);
+		str2[i] = str[i];
 	}
-	_strcpy(dupl, str);
-	free(str);
-	return (dupl);
+
+	return (str2);
 }

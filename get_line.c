@@ -2,10 +2,11 @@
 #include "shell.h"
 
 /**
-*_getline - read the input
-*Return: The line readed
+* _getline - Read The Input By User From Stdin
+* @envi: Enviroment Variable To Free Case Of ^D
+* Return: Input
 */
-char *_getline()
+char *_getline(char **envi)
 {
 int i, buffsize = 1024, rd;
 char c = 0;
@@ -14,7 +15,6 @@ char *buff = malloc(buffsize);
 	if (buff == NULL)
 	{
 		free(buff);
-		buff = NULL;
 		return (NULL);
 	}
 
@@ -25,6 +25,7 @@ char *buff = malloc(buffsize);
 		if (rd == 0)
 		{
 			free(buff);
+			free_env(envi);
 			exit(EXIT_SUCCESS);
 		}
 		buff[i] = c;

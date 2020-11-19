@@ -1,16 +1,20 @@
 #include "shell.h"
 /**
- * exit_bul - exit shell
- *@cmd:command
- * Return:int
+ * exit_bul - Exit Statue Shell
+ * @cmd: Parsed Command
+ * @input: User Input
+ * @env: Environment Variables
+ * Return: Void (Exit Statue)
  */
-int  exit_bul(char **cmd)
+void  exit_bul(char **cmd, char *input, char **env)
 {
 	int statue, i = 0;
 
 	if (cmd[1] == NULL)
 	{
+		free(input);
 		free(cmd);
+		free_env(env);
 		exit(errno);
 	}
 	while (cmd[1][i])
@@ -18,18 +22,20 @@ int  exit_bul(char **cmd)
 		if (_isalpha(cmd[1][i++]) < 0)
 		{
 			perror("illegal number");
-			return (-1);
 		}
 	}
 	statue = _atoi(cmd[1]);
+	free(input);
+	free(cmd);
+	free_env(env);
 	exit(statue);
 }
 
 
 /**
- * change_dir - change directory command
- * @cmd: command
- * Return: 1 in success
+ * change_dir - Change Dirctorie
+ * @cmd: Parsed Command
+ * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
  */
 int change_dir(char **cmd)
 {
@@ -40,7 +46,10 @@ int change_dir(char **cmd)
 	if (cmd[1] == NULL || _strcmp(cmd[1], "~") == 0)
 		value = chdir(getenv("HOME"));
 	else if (_strcmp(cmd[1], "-") == 0)
-		value = chdir(getenv("OLDPWD"));
+	{
+		chdir(getenv("OLDPWD"));
+		value = 0;
+	}
 	else if (_strcmp(cmd[1], "..") == 0)
 		value = chdir(cmd[1]);
 	else if (_strcmp(cmd[1], ".") == 0)
@@ -56,7 +65,10 @@ int change_dir(char **cmd)
 		value = chdir(cmd[1]);
 
 	if (value == -1)
+	{
+		perror("hsh");
 		return (-1);
+	}
 	else if (value != -1)
 	{
 		getcwd(cwd, sizeof(cwd));
@@ -66,9 +78,9 @@ int change_dir(char **cmd)
 	return (0);
 }
 /**
- * dis_env - display envirment variable bultin
- *@cmd:command
- * Return:int
+ * dis_env - Display Enviroment Variable
+ *@cmd:Parsed Command
+ * Return:Always 0
  */
 int dis_env(__attribute__((unused)) char **cmd)
 {
@@ -84,10 +96,9 @@ size_t i;
 	return (0);
 }
 /**
- * display_help - builtin to display help
- *
- * @cmd:command to excute
- * Return: int
+ * display_help - Displaying Help For Builtin
+ * @cmd:Parsed Command
+ * Return: 0 Succes -1 Fail
  */
 int display_help(char **cmd)
 {
@@ -113,10 +124,10 @@ int display_help(char **cmd)
 	return (0);
 }
 /**
- * echo_bul - echo bultin
+ * echo_bul - Excute Echo Cases
  *
- * @cmd: commande line
- * Return: always 0
+ * @cmd: Parsed Command
+ * Return: Always 0 Or Excute Normal Echo
  */
 int echo_bul(char **cmd)
 {

@@ -1,38 +1,41 @@
 #include "shell.h"
 
 /**
- * main - simple shell
- * @argc:arg count
- * @argv:args input to shell
- * Return:int
+ * main - Simple Shell (Hsh)
+ * @argc: Argument Count
+ * @argv:Argument Value
+ * Return: Exit Value By Status
  */
 
 int main(__attribute__((unused)) int argc, char **argv)
 {
 	char *input, **cmd;
 	int counter = 0;
+	char *envi[50];
+	int statue = 1;
 
 	if (argv[1] != NULL)
-		read_file(argv);
+		read_file(argv[1]);
+	creat_envi(envi);
 	signal(SIGINT, signal_to_handel);
-	while (1)
+	while (statue)
 	{
+		counter++;
 		if (isatty(STDIN_FILENO))
 			prompt();
-		fflush(stdin);
 		counter++;
-		input = _getline();
-		if (input == NULL)
-			continue;
-		else
-			history(input);
-		cmd = parse_cmd(input);
-		if (cmd[0] == NULL)
+		input = _getline(envi);
+		if (input[0] == '\0')
 		{
-			free(cmd);
 			continue;
 		}
-		if (check_builtin(cmd) == 0)
+		history(input);
+		cmd = parse_cmd(input);
+		if (_strcmp(cmd[0], "exit") == 0)
+		{
+			exit_bul(cmd, input, envi);
+		}
+		else if ((check_builtin(cmd)) == 0)
 		{
 			handle_builtin(cmd);
 			free_all(cmd, input);
@@ -40,17 +43,12 @@ int main(__attribute__((unused)) int argc, char **argv)
 		}
 		else
 		{
-		path_cmd(cmd);
-			if (check_cmd(cmd, counter) == -1)
-			{
-				free_all(cmd, input);
-				break;
-			}
-				free((char *)cmd);
-			}
-			free(input);
+			statue = check_cmd(cmd, input, envi, counter);
+		}
+		free_all(cmd, input);
 	}
-	return (0);
+	free_env(envi);
+	return (statue);
 }
 /**
  * check_builtin - check builtin
@@ -61,7 +59,6 @@ int main(__attribute__((unused)) int argc, char **argv)
 int check_builtin(char **cmd)
 {
 	bul_t fun[] = {
-		{"exit", NULL},
 		{"cd", NULL},
 		{"help", NULL},
 		{"echo", NULL},
@@ -69,6 +66,10 @@ int check_builtin(char **cmd)
 		{NULL, NULL}
 	};
 	int i = 0;
+		if (*cmd == NULL)
+	{
+		return (-1);
+	}
 
 	while ((fun + i)->command)
 	{
@@ -79,15 +80,15 @@ int check_builtin(char **cmd)
 	return (-1);
 }
 /**
- * free_all - free pointer in main
- * @cmd:pointer to pointer char
- * @line:pointer
- * Return:void
+ * creat_envi - Creat Array of Enviroment Variable
+ * @envi: Array of Enviroment Variable
+ * Return: Void
  */
-void free_all(char **cmd, char *line)
+void creat_envi(char **envi)
 {
-	free(cmd);
-	free(line);
-	cmd = NULL;
-	line = NULL;
+	int i;
+
+	for (i = 0; environ[i]; i++)
+		envi[i] = _strdup(environ[i]);
+	envi[i] = NULL;
 }

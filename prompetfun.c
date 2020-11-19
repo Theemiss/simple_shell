@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * prompt - display prompt
+ * prompt - Display Shell Prompt
  */
 void prompt(void)
 {
@@ -9,13 +9,12 @@ void prompt(void)
 	_putchar(' ');
 }
 /**
- * print_error - print error
- *
- * @cmd:command to return in failure
- * @counter:hsh counter
- * Return: always -1
+ * print_error - Display Error Based on Command and How Many Time Shell Looped
+ * @input:User Input
+ * @counter:Simple Shell Count Loop
+ * Return: Void
  */
-void print_error(char *cmd, int counter)
+void print_error(char *input, int counter)
 {
 	char *er;
 
@@ -25,6 +24,6 @@ void print_error(char *cmd, int counter)
 	PRINTER(er);
 	free(er);
 	PRINTER(": ");
-	PRINTER(cmd);
+	PRINTER(input);
 	PRINTER(": not found\n");
 }

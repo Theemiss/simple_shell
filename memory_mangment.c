@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- **_realloc -  a function that reallocates a memory block using malloc and free
- *@ptr: pointer
- *@old_size: int
- *@new_size: int
- *Return: pointer
+ **_realloc -  Reallocates A Memory Block Using Malloc And Free
+ *@ptr: Pointer
+ *@old_size: Previous Size Of The Pointer
+ *@new_size: New Size Of The Pointer
+ *Return: Void Pointer Rellocated Memory
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
@@ -35,28 +35,25 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 }
 /**
- * free_array - free an array
- * @tokens:array
- *Return: void
+ * free_all - Free Array Of Char Pointer And Char Pointer
+ * @cmd:Array Pointer
+ * @line:Char Pointer
+ * Return: Void
  */
-void free_array(char **tokens)
+void free_all(char **cmd, char *line)
 {
-	unsigned int i = 1;
-
-	if (tokens == NULL)
-		return;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
+	free(cmd);
+	free(line);
+	cmd = NULL;
+	line = NULL;
 }
+
 /**
- * _memcpy - copy byte from src to dest
- * @dest: dest
- * @src:src
- * @n:size
- *Return: void
+ * _memcpy - Copy Byte From Source To Destination
+ * @dest: Destination Pointer
+ * @src: Source Pointer
+ * @n: Size (How Much You Will Copy)
+ *Return: Void Pointer
  */
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
@@ -69,11 +66,11 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 /**
- * fill_an_array - fill an array
- * @a:void
- * @el:int
- * @len:len int
- *Return: void
+ * fill_an_array - Fill An Array By Constant Byte
+ * @a:Void Pointer
+ * @el: Int
+ * @len:Length Int
+ *Return: Void Pointer
  */
 void *fill_an_array(void *a, int el, unsigned int len)
 {
@@ -89,9 +86,9 @@ void *fill_an_array(void *a, int el, unsigned int len)
 	return (a);
 }
 /**
- * _calloc - a function that allocates memory for an array, using malloc.
- * @size: int
- * Return: pointer to an array
+ * _calloc -  Allocates Memory For An Array, Using Malloc.
+ * @size: Size
+ * Return: Void Pointer
  */
 void *_calloc(unsigned int size)
 {

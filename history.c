@@ -1,11 +1,10 @@
 #include "shell.h"
 /**
- * history - write stdin in a file and store it
- *
- * @cmd:input stdin
- * Return: write it in a file 0 Success -1 Fail
+ * history - Fill File By User Input
+ * @input: User Input
+ * Return: -1 Fail 0 Succes
  */
-int history(char *cmd)
+int history(char *input)
 {
 	char *filename = "/home/themis/Holberton/simple_shell/.simple_shell_history";
 	ssize_t fd, w;
@@ -16,13 +15,27 @@ int history(char *cmd)
 	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 00600);
 	if (fd < 0)
 		return (-1);
-	if (cmd)
+	if (input)
 	{
-		while (cmd[len])
+		while (input[len])
 			len++;
-		w = write(fd, cmd, len);
+		w = write(fd, input, len);
 		if (w < 0)
 			return (-1);
 	}
 	return (1);
+}
+/**
+ * free_env - Free Enviroment Variable Array
+ * @env:  Environment variables.
+ * Return: Void
+ */
+void free_env(char **env)
+{
+	int i;
+
+	for (i = 0; env[i]; i++)
+	{
+		free(env[i]);
+	}
 }

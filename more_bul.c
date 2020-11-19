@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * history_dis - display history
- * @cmd:command
+ * history_dis - Display History Of User Input Simple Shell
+ * @cmd:Parsed Command
  * Return: 0 Succes -1 Fail
  */
 int history_dis(__attribute__((unused))char **cmd)
@@ -29,12 +29,12 @@ int history_dis(__attribute__((unused))char **cmd)
 		}
 	}
 	_putchar('\n');
-	return (1);
+	return (0);
 }
 }
 /**
- * print_echo - excute echo
- * @cmd:command
+ * print_echo - Excute Normal Echo
+ * @cmd: Parsed Command
  * Return: 0 Succes -1 Fail
  */
 int print_echo(char **cmd)
