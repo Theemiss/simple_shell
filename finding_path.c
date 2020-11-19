@@ -1,13 +1,11 @@
 #include "shell.h"
 
 /**
- * path_cmd - function will search directories in $PATH environment variable
- *
- * @tokens: Parsed commands passed from input.
- *
- * Return: 1 on failure, or 0 on Success.
+ * path_cmd -  Search In $PATH For Excutable Command
+ * @cmd: Parsed Input
+ * Return: 1  Failure  0  Success.
  */
-int path_cmd(char **tokens)
+int path_cmd(char **cmd)
 {
 	char *path, *value, *cmd_path;
 	struct stat buf;
@@ -16,28 +14,29 @@ int path_cmd(char **tokens)
 	value = strtok(path, ":");
 	while (value != NULL)
 	{
-		cmd_path = build_cmd(*tokens, value);
+		cmd_path = build(*cmd, value);
 		if (stat(cmd_path, &buf) == 0)
 		{
-			*tokens = _strdup(cmd_path);
+			*cmd = _strdup(cmd_path);
+			free(cmd_path);
 			free(path);
-			return (-1);
+			return (0);
 		}
 		free(cmd_path);
 		value = strtok(NULL, ":");
 	}
-	if (path != NULL)
-		free(path);
+	free(path);
+
 	return (1);
 }
 /**
- * build_cmd - builds full command path from input.
- * @token: The command passed.
- * @value: The current directory found to have the command file.
+ * build - Build Command
+ * @token: Excutable Command
+ * @value: Dirctory Conatining Command
  *
- * Return: Full command path.
+ * Return: Parsed Full Path Of Command Or NULL Case Failed
  */
-char *build_cmd(char *token, char *value)
+char *build(char *token, char *value)
 {
 	char *cmd_path;
 	size_t cmd_len;
@@ -58,25 +57,24 @@ char *build_cmd(char *token, char *value)
 	return (cmd_path);
 }
 /**
- * _getenv - Gets the value of an environment variable.
- * @name: Environment variable.
- *
- * Return: The value of the environment variable if found, else NULL.
+ * _getenv - Gets The Value Of Enviroment Variable By Name
+ * @name: Environment Variable Name
+ * Return: The Value of the Environment Variable Else NULL.
  */
 char *_getenv(char *name)
 {
-	size_t namelen;
-	size_t valuelen;
+	size_t namel;
+	size_t valuel;
 	char *value;
 	int i, x, j;
 
-	namelen = _strlen(name);
+	namel = _strlen(name);
 	for (i = 0 ; environ[i]; i++)
 	{
-		if (_strncmp(name, environ[i], namelen) == 0)
+		if (_strncmp(name, environ[i], namel) == 0)
 		{
-			valuelen = _strlen(environ[i]) - namelen;
-			value = malloc(sizeof(char) * valuelen);
+			valuel = _strlen(environ[i]) - namel;
+			value = malloc(sizeof(char) * valuel);
 			if (!value)
 			{
 				free(value);
@@ -85,7 +83,7 @@ char *_getenv(char *name)
 			}
 
 			j = 0;
-			for (x = namelen + 1; environ[i][x]; x++, j++)
+			for (x = namel + 1; environ[i][x]; x++, j++)
 			{
 				value[j] = environ[i][x];
 			}

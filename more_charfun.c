@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _strcmp - compare 2 string
- * @s1:string
- * @s2:strmp
- * Return:int
+ * _strcmp - Compare Two String
+ * @s1:String 1
+ * @s2:String 2
+ * Return: 0 If Identical Otherwise How Much Diffrent
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -25,9 +25,9 @@ int cmp = 0, i;
 	return (cmp);
 }
 /**
- * _isalpha - check charachter.
- *@c: charachter
- * Return: Always 0.
+ * _isalpha - Check if Alphabtic
+ *@c: Character
+ * Return: 1 If True 0 If Not
  */
 int _isalpha(int c)
 {
@@ -41,10 +41,9 @@ return (0);
 }
 }
 /**
- * _itoa - convert int to char
- *
- * @n: int
- * Return: char from int
+ * _itoa - Convert Integer To Char
+ * @n: Int To Convert
+ * Return: Char Pointer
  */
 char *_itoa(unsigned int n)
 {
@@ -68,10 +67,10 @@ char *_itoa(unsigned int n)
 	return (s);
 }
 /**
- *  array_rev - reverse array
- * @arr:array
- * @len:integer
- * Return:void
+ *  array_rev - Reverse Array
+ * @arr:Array To Reverse
+ * @len:Length Of Array
+ * Return: Void(Reverse Array)
  */
 void array_rev(char *arr, int len)
 {
@@ -86,10 +85,9 @@ void array_rev(char *arr, int len)
 	}
 }
 /**
- * intlen - Determine the number of digit int integer
- * @num: the given number
- *
- * Return: the length of the integer
+ * intlen - Determine Length Of Int
+ * @num: Given Int
+ * Return: Length Of Int
  */
 int intlen(int num)
 {
