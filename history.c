@@ -6,7 +6,7 @@
  */
 int history(char *input)
 {
-	char *filename = "/home/themis/Holberton/simple_shell/.simple_shell_history";
+	char *filename = ".simple_shell_history";
 	ssize_t fd, w;
 	int len = 0;
 

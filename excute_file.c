@@ -10,7 +10,6 @@ void read_file(char *filename)
 	FILE *fp;
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
 	char *envi[50];
 	int counter = 0;
 
@@ -20,7 +19,7 @@ void read_file(char *filename)
 		exit(EXIT_FAILURE);
 	}
 	creat_envi(envi);
-	while ((read = getline(&line, &len, fp)) != -1)
+	while ((getline(&line, &len, fp)) != -1)
 	{
 		counter++;
 		treat_file(line, envi, counter, fp);

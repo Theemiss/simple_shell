@@ -7,30 +7,32 @@
  */
 int history_dis(__attribute__((unused))char **cmd)
 {
-	{
-	int fd, fw, rd = 1;
-	char c;
-	char *filename = "/home/themis/Holberton/simple_shell/.simple_shell_history";
+	char *filename = ".simple_shell_history";
+	FILE *fp;
+	char *line = NULL;
+	size_t len = 0;
+	int counter = 0;
+	char *er;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	fp = fopen(filename, "r");
+	if (fp == NULL)
 	{
-		perror("Error");
 		return (-1);
 	}
-	while (rd > 0)
+	while ((getline(&line, &len, fp)) != -1)
 	{
-		rd = read(fd, &c, 1);
-		fw = write(STDOUT_FILENO, &c, rd);
-		if (fw < 0)
-		{
-			perror("Error");
-			return (-1);
-		}
+		counter++;
+		er = _itoa(counter);
+		PRINTER(er);
+		free(er);
+		PRINTER(" ");
+		PRINTER(line);
+
 	}
-	_putchar('\n');
+	if (line)
+		free(line);
+	fclose(fp);
 	return (0);
-}
 }
 /**
  * print_echo - Excute Normal Echo
