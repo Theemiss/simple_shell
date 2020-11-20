@@ -40,10 +40,9 @@ void  exit_bul(char **cmd, char *input, char **env)
  */
 int change_dir(char **cmd, __attribute__((unused))int er)
 {
-	int value = -1, st = -1;
+	int value = -1;
 	char path[PATH_MAX];
 	char cwd[PATH_MAX];
-	char *c;
 
 	if (cmd[1] == NULL || _strcmp(cmd[1], "~") == 0)
 		value = chdir(getenv("HOME"));
