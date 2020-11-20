@@ -11,7 +11,9 @@ In order to run this program,
 Clone This Repo
 
 `` git clone https://github.com/Theemiss/simple_shell ``
+
 compile it with  
+
 `gcc 4.8.4 -Wall -Werror -Wextra -pedantic *.c -o hsh`.  
 You can then run it by invoking `./hsh` in that same directory.  
 
@@ -165,6 +167,10 @@ List of allowed functions and system calls
  * _getenv
  * _getline
 
+For More Info About It Check The Man Page by
+```
+Username@your-regular-prompt:~$ man ./man_1_simple_shell
+```
 ## Authors
 * Ahmed Belhaj <[Theemiss](https://github.com/Theemiss)>
 
