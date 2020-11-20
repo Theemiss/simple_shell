@@ -6,7 +6,10 @@ This repository is a [Holberton School](https://www.holbertonschool.com/) Projec
 The goal in this project was to make us understand how a shell works. To single out some items: what is the *environment*, the difference between *functions* and *system calls*, how to create *processes* using `execve`...  
 
 ## Usage 
-n order to run this program, after you download the code you can compile it with  
+In order to run this program, 
+Clone This Repo
+`` git clone https://github.com/Theemiss/simple_shell ``
+compile it with  
 `gcc 4.8.4 -Wall -Werror -Wextra -pedantic *.c -o hsh`.  
 You can then run it by invoking `./hsh` in that same directory.  
 
@@ -18,7 +21,7 @@ It wil then display a simple prompt and wait for commands.
 A command will be of the type `$ command`  
 This shell can handle two types of commands: builtins and normal program.
 ##### List of built-ins
-Currently the list of built-ins we wrote is:  
+Currently the list of built-ins I wrote is:  
 * cd [directory]  
 Switch to the specified directory (path).
 * env  
@@ -30,7 +33,9 @@ Return the value of the NAME variable if it is in the environment
 * help [command]  
 Displays the syntax for the command, or all commands.  
 * history  
-Displays the last commands.
+Displays the last typed user .
+* echo [$$] or [$?] or [$PATH]
+Return pid and exit statue and PATH.
 ##### Command
 Basicly Every Program in `$PATH`
 It Support Single Word like `ls` 
