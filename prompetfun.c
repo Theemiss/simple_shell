@@ -5,8 +5,13 @@
  */
 void prompt(void)
 {
-	_putchar('$');
-	_putchar(' ');
+	char *prom = getenv("USER");
+	char *cwd = getenv("PWD");
+
+	PRINTER(prom);
+	PRINTER(":~");
+	PRINTER(cwd);
+	PRINTER("$ ");
 }
 /**
  * print_error - Display Error Based on Command and How Many Time Shell Looped
