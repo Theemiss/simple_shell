@@ -46,7 +46,7 @@ void treat_file(char *line, char **envi, int counter, FILE *fp)
 
 	cmd = parse_cmd(line);
 
-		if (_strcmp(cmd[0], "exit") == 0)
+		if (_strncmp(cmd[0], "exit", 4) == 0)
 		{
 			exit_bul_for_file(cmd, line, envi, fp);
 		}

@@ -137,18 +137,18 @@ int echo_bul(char **cmd, int st)
 	char *path;
 	unsigned int  pid = getppid();
 
-	if (_strcmp(cmd[1], "$?") == 0)
+	if (_strncmp(cmd[1], "$?", 2) == 0)
 	{
 		print_number_in(st);
 		PRINTER("\n");
 	}
-	else if (_strcmp(cmd[1], "$$") == 0)
+	else if (_strncmp(cmd[1], "$$", 2) == 0)
 	{
 		print_number(pid);
 		PRINTER("\n");
 
 	}
-	else if (_strcmp(cmd[1], "$PATH") == 0)
+	else if (_strncmp(cmd[1], "$PATH", 5) == 0)
 	{
 		path = _getenv("PATH");
 		PRINTER(path);

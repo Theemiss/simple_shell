@@ -27,10 +27,12 @@ extern char **environ;
 
 
 
-char *_strtok(char *str, char *tok);
+
 
 /**###### STRING FUNCTION ######*/
 
+char *_strtok(char *str, const char *tok);
+unsigned int check_delim(char c, const char *str);
 char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
 int _putchar(char c);

@@ -43,6 +43,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		else
 		{
 			st = check_cmd(cmd, input, envi, counter);
+
 		}
 		free_all(cmd, input);
 	}

@@ -11,7 +11,7 @@ int path_cmd(char **cmd)
 	struct stat buf;
 
 	path = _getenv("PATH");
-	value = strtok(path, ":");
+	value = _strtok(path, ":");
 	while (value != NULL)
 	{
 		cmd_path = build(*cmd, value);
@@ -23,7 +23,7 @@ int path_cmd(char **cmd)
 			return (0);
 		}
 		free(cmd_path);
-		value = strtok(NULL, ":");
+		value = _strtok(NULL, ":");
 	}
 	free(path);
 
