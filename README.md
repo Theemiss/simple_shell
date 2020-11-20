@@ -88,11 +88,11 @@ Username@your-regular-prompt:~$
 ```
 **Case Exit Statue**
 ```
-julien@ubuntu:~/shell$ ./hsh
+Username@your-regular-prompt:~$ ./hsh
 $ exit 98
-julien@ubuntu:~/shell$ echo $?
+Username@your-regular-prompt:~$ echo $?
 98
-julien@ubuntu:~/shell$ 
+Username@your-regular-prompt:~$
 
 ```
 Keep Exploring The echo Builtin and history ... Using The Help Builtin
