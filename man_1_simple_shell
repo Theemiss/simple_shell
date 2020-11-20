@@ -1,0 +1,99 @@
+.TH man 3 "20 November 2020" "0.20" "HSH man page"
+.SH NAME
+.B hsh 
+- Simple Shell Studying purpose Holberton School
+.SH SYNOPSIS
+.B ./hsh 
+[command] [options] [FILE]
+.SH COPYRIGHT
+.B hsh 
+is Copyright (C) Ahmed Belhaj  and licensed under the MIT license.
+.SH DESCRIPTION
+.B hsh 
+(Simple Shell) is an end of semester project for students at Holberton School where we expore, 
+understand and build a working functional simple shell program.
+.B Overview
+
+The simple shell is a simplified iteration of a command line interpreter, similar to 
+.B bash or 
+.B dash. 
+.I FORMAT [ARGUMENT]...
+.SH OPTIONS
+.B hsh
+operates in both 
+.I interactive 
+and 
+.I non-interactive
+ mode. The user may initiate 
+.B simple shell
+and begin working or initate 
+.B simple shell
+using commands meant to be run by the program.
+.SH ARGUMENTS
+The first argument, argument 0 is understood to be the command to be run by 
+.B simple shell
+and arguments following as modifiers or options.
+.SH INVOCATION
+.B hsh
+may be invoked with the same functionality in 
+.I interactive 
+or 
+.I non-interactive 
+mode.  The user may quit the program by typing "exit", "Ctrl + D",  on the command line.
+When the program quits or a command has been executed, 
+.B simple shell 
+returns with a new prompt: "$ "
+
+.B Example
+.IP
+
+$./hsh
+
+$pwd
+
+Username@your-regular-prompt:~$
+
+$
+
+$/bin/pwd
+
+Username@your-regular-prompt:~$
+$
+
+.SH RESERVED WORDS
+.B exit: 
+quits the program, exits the shell.
+
+.B env: 
+prints the environment variables
+
+.SH HISTORY
+The 
+.B history 
+built-in displays the history list, one command per line, preceded with line numbers, starting with 0. On exit the entire history is written to a file named
+.I simple_shell_history
+in the 
+.I $HOME
+directory.
+.SH SHELL BUILTIN COMMANDS
+The commands 
+.B exit
+and 
+.B env
+are handled automatically by 
+.B hsh
+
+.SH SEE ALSO
+.I sh(1)
+,
+.I bash(1)
+,
+.I _printf(3)
+
+.SH BUGS
+No Known bug , please 
+Report 
+.B hsh
+bugs to https://github.com/Theemiss/simple_shell/issues
+.SH AUTHOR
+Ahmed Belhaj
