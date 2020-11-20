@@ -7,7 +7,9 @@ The goal in this project was to make us understand how a shell works. To single 
 
 ## Usage 
 In order to run this program, 
+
 Clone This Repo
+
 `` git clone https://github.com/Theemiss/simple_shell ``
 compile it with  
 `gcc 4.8.4 -Wall -Werror -Wextra -pedantic *.c -o hsh`.  
