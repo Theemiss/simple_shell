@@ -10,7 +10,7 @@ n order to run this program, after you download the code you can compile it with
 `gcc 4.8.4 -Wall -Werror -Wextra -pedantic *.c -o hsh`.  
 You can then run it by invoking `./hsh` in that same directory.  
 
-###How to use it
+### How to use it
 In order to use this shell, in a terminal, first run the program:    
 `prompt$ ./hsh`  
 It wil then display a simple prompt and wait for commands.  
@@ -86,7 +86,7 @@ $ exit
 Username@your-regular-prompt:~$ 
 
 ```
-**case Exit Statue**
+**Case Exit Statue**
 ```
 julien@ubuntu:~/shell$ ./hsh
 $ exit 98
