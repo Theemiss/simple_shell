@@ -2,10 +2,11 @@
 
 /**
  * history_dis - Display History Of User Input Simple Shell
- * @cmd:Parsed Command
+ * @c:Parsed Command
+ * @s:Statue Of Last Excute
  * Return: 0 Succes -1 Fail
  */
-int history_dis(__attribute__((unused))char **cmd)
+int history_dis(__attribute__((unused))char **c, __attribute__((unused))int s)
 {
 	char *filename = ".simple_shell_history";
 	FILE *fp;
@@ -63,5 +64,5 @@ int print_echo(char **cmd)
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (0);
+	return (1);
 }

@@ -42,6 +42,7 @@ void read_file(char *filename)
 void treat_file(char *line, char **envi, int counter, FILE *fp)
 {
 	char **cmd;
+	int st = 0;
 
 	cmd = parse_cmd(line);
 
@@ -49,15 +50,15 @@ void treat_file(char *line, char **envi, int counter, FILE *fp)
 		{
 			exit_bul_for_file(cmd, line, envi, fp);
 		}
-		else if ((check_builtin(cmd)) == 0)
+		else if (check_builtin(cmd) == 0)
 		{
-			handle_builtin(cmd);
-				free(cmd);
+			st = handle_builtin(cmd, st);
+			free(cmd);
 		}
 		else
 		{
-			 check_cmd(cmd, line, envi, counter);
-				free(cmd);
+			st = check_cmd(cmd, line, envi, counter);
+			free(cmd);
 		}
 }
 /**

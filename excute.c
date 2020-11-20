@@ -3,10 +3,11 @@
 /**
  * handle_builtin - Handle Builtin Command
  * @cmd: Parsed Command
+ * @er:statue of last Excute
  * Return: -1 Fail 0 Succes (Return :Excute Builtin)
  */
 
-int handle_builtin(char **cmd)
+int handle_builtin(char **cmd, int er)
 {
 	 bul_t bil[] = {
 		{"cd", change_dir},
@@ -22,7 +23,7 @@ int handle_builtin(char **cmd)
 	{
 		if (_strncmp(cmd[0], (bil + i)->command, _strlen(cmd[0])) == 0)
 		{
-			return ((bil + i)->fun(cmd));
+			return ((bil + i)->fun(cmd, er));
 		}
 		i++;
 	}
@@ -51,7 +52,7 @@ int check_cmd(char **cmd, char *input, char **env, int c)
 	if (pid == -1)
 	{
 		perror("Error");
-		return (EXIT_FAILURE);
+		return (-1);
 	}
 
 	if (pid == 0)
@@ -67,10 +68,10 @@ int check_cmd(char **cmd, char *input, char **env, int c)
 			free(input);
 			free(cmd);
 			free_env(env);
-			exit(EXIT_FAILURE);
+			exit(-1);
 		}
 		free_env(env);
-		return (EXIT_SUCCESS);
+		return (0);
 	}
 	wait(&status);
 	return (1);

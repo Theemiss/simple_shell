@@ -10,9 +10,8 @@
 int main(__attribute__((unused)) int argc, char **argv)
 {
 	char *input, **cmd;
-	int counter = 0;
+	int counter = 0, statue = 1, st;
 	char *envi[50];
-	int statue = 1;
 
 	if (argv[1] != NULL)
 		read_file(argv[1]);
@@ -29,21 +28,21 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			continue;
 		}
-		history(input);
+		st = history(input);
 		cmd = parse_cmd(input);
 		if (_strcmp(cmd[0], "exit") == 0)
 		{
 			exit_bul(cmd, input, envi);
 		}
-		else if ((check_builtin(cmd)) == 0)
+		else if (check_builtin(cmd) == 0)
 		{
-			handle_builtin(cmd);
+			st = handle_builtin(cmd, st);
 			free_all(cmd, input);
 			continue;
 		}
 		else
 		{
-			statue = check_cmd(cmd, input, envi, counter);
+			st = check_cmd(cmd, input, envi, counter);
 		}
 		free_all(cmd, input);
 	}

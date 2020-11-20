@@ -35,13 +35,15 @@ void  exit_bul(char **cmd, char *input, char **env)
 /**
  * change_dir - Change Dirctorie
  * @cmd: Parsed Command
+ * @er: Statue Last Command Excuted
  * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
  */
-int change_dir(char **cmd)
+int change_dir(char **cmd, __attribute__((unused))int er)
 {
-	int value = -1;
+	int value = -1, st = -1;
 	char path[PATH_MAX];
 	char cwd[PATH_MAX];
+	char *c;
 
 	if (cmd[1] == NULL || _strcmp(cmd[1], "~") == 0)
 		value = chdir(getenv("HOME"));
@@ -79,10 +81,11 @@ int change_dir(char **cmd)
 }
 /**
  * dis_env - Display Enviroment Variable
- *@cmd:Parsed Command
+ * @cmd:Parsed Command
+ * @er:Statue of Last command Excuted
  * Return:Always 0
  */
-int dis_env(__attribute__((unused)) char **cmd)
+int dis_env(__attribute__((unused)) char **cmd, __attribute__((unused)) int er)
 {
 size_t i;
 	int len;
@@ -98,9 +101,10 @@ size_t i;
 /**
  * display_help - Displaying Help For Builtin
  * @cmd:Parsed Command
+ * @er: Statue Of Last Command Excuted
  * Return: 0 Succes -1 Fail
  */
-int display_help(char **cmd)
+int display_help(char **cmd, __attribute__((unused))int er)
 {
 	int fd, fw, rd = 1;
 	char c;
@@ -125,27 +129,36 @@ int display_help(char **cmd)
 }
 /**
  * echo_bul - Excute Echo Cases
- *
+ * @st:Statue Of Last Command Excuted
  * @cmd: Parsed Command
  * Return: Always 0 Or Excute Normal Echo
  */
-int echo_bul(char **cmd)
+int echo_bul(char **cmd, int st)
 {
+	char *path;
+	unsigned int  pid = getppid();
 
 	if (_strcmp(cmd[1], "$?") == 0)
 	{
-		system("exec echo $?");
+		print_number_in(st);
+		PRINTER("\n");
 	}
 	else if (_strcmp(cmd[1], "$$") == 0)
 	{
-		system("exec echo $$");
+		print_number(pid);
+		PRINTER("\n");
+
 	}
 	else if (_strcmp(cmd[1], "$PATH") == 0)
 	{
-		system("exec echo $PATH");
+		path = _getenv("PATH");
+		PRINTER(path);
+		PRINTER("\n");
+		free(path);
+
 	}
 	else
 		return (print_echo(cmd));
 
-	return (0);
+	return (1);
 }

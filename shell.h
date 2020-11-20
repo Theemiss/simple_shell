@@ -67,7 +67,7 @@ char *_getline(char **envi);
 int path_cmd(char **line);
 char *_getenv(char *name);
 char **parse_cmd(char *cmd);
-int handle_builtin(char **cmd);
+int handle_builtin(char **cmd, int er);
 void read_file(char *argv);
 char *build(char *token, char *value);
 int check_builtin(char **cmd);
@@ -80,16 +80,17 @@ void exit_bul_for_file(char **cmd, char *line, char **envi, FILE *fd);
 
 void hashtag_handle(char *buff);
 int history(char *input);
-int history_dis(char **cmd);
-int dis_env(char **cmd);
-int change_dir(char **cmd);
-int display_help(char **cmd);
-int echo_bul(char **cmd);
+int history_dis(char **cmd, int er);
+int dis_env(char **cmd, int er);
+int change_dir(char **cmd, int er);
+int display_help(char **cmd, int er);
+int echo_bul(char **cmd, int er);
 void  exit_bul(char **cmd, char *input, char **env);
 int print_echo(char **cmd);
 
-/** ####error handle ####*/
-
+/** ####error handle and Printer ####*/
+void print_number(unsigned int n);
+void print_number_in(int n);
 void print_error(char *line, int c);
 
 /**
@@ -101,7 +102,7 @@ void print_error(char *line, int c);
 typedef struct  bulltin
 {
 	char *command;
-	int (*fun)(char **line);
+	int (*fun)(char **line, int er);
 } bul_t;
 
 #endif
