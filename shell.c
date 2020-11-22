@@ -11,11 +11,9 @@ int main(__attribute__((unused)) int argc, char **argv)
 {
 	char *input, **cmd;
 	int counter = 0, statue = 1, st;
-	char *envi[50];
 
 	if (argv[1] != NULL)
 		read_file(argv[1]);
-	creat_envi(envi);
 	signal(SIGINT, signal_to_handel);
 	while (statue)
 	{
@@ -23,7 +21,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		if (isatty(STDIN_FILENO))
 			prompt();
 		counter++;
-		input = _getline(envi);
+		input = _getline();
 		if (input[0] == '\0')
 		{
 			continue;
@@ -32,7 +30,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		cmd = parse_cmd(input);
 		if (_strcmp(cmd[0], "exit") == 0)
 		{
-			exit_bul(cmd, input, envi);
+			exit_bul(cmd, input);
 		}
 		else if (check_builtin(cmd) == 0)
 		{
@@ -42,12 +40,11 @@ int main(__attribute__((unused)) int argc, char **argv)
 		}
 		else
 		{
-			st = check_cmd(cmd, input, envi, counter);
+			st = check_cmd(cmd, input, counter);
 
 		}
 		free_all(cmd, input);
 	}
-	free_env(envi);
 	return (statue);
 }
 /**

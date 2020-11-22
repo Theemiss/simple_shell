@@ -62,7 +62,7 @@ void free_all(char **input, char *line);
 
 void prompt(void);
 void signal_to_handel(int sig);
-char *_getline(char **envi);
+char *_getline(void);
 
 /** ###### Command parser and extractor ###*/
 
@@ -74,9 +74,9 @@ void read_file(char *argv);
 char *build(char *token, char *value);
 int check_builtin(char **cmd);
 void creat_envi(char **envi);
-int check_cmd(char **tokens, char *line, char **env, int count);
-void treat_file(char *line, char **envi, int counter, FILE *fd);
-void exit_bul_for_file(char **cmd, char *line, char **envi, FILE *fd);
+int check_cmd(char **tokens, char *line, int count);
+void treat_file(char *line, int counter, FILE *fd);
+void exit_bul_for_file(char **cmd, char *line, FILE *fd);
 
 /** ####BUL FUNC #####*/
 
@@ -87,7 +87,7 @@ int dis_env(char **cmd, int er);
 int change_dir(char **cmd, int er);
 int display_help(char **cmd, int er);
 int echo_bul(char **cmd, int er);
-void  exit_bul(char **cmd, char *input, char **env);
+void  exit_bul(char **cmd, char *input);
 int print_echo(char **cmd);
 
 /** ####error handle and Printer ####*/

@@ -3,10 +3,9 @@
  * exit_bul - Exit Statue Shell
  * @cmd: Parsed Command
  * @input: User Input
- * @env: Environment Variables
  * Return: Void (Exit Statue)
  */
-void  exit_bul(char **cmd, char *input, char **env)
+void  exit_bul(char **cmd, char *input)
 {
 	int statue, i = 0;
 
@@ -14,7 +13,6 @@ void  exit_bul(char **cmd, char *input, char **env)
 	{
 		free(input);
 		free(cmd);
-		free_env(env);
 		exit(errno);
 	}
 	while (cmd[1][i])
@@ -27,7 +25,6 @@ void  exit_bul(char **cmd, char *input, char **env)
 	statue = _atoi(cmd[1]);
 	free(input);
 	free(cmd);
-	free_env(env);
 	exit(statue);
 }
 

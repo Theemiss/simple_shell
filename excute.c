@@ -34,11 +34,10 @@ int handle_builtin(char **cmd, int er)
  *
  * @cmd:Parsed Command
  * @input: User Input
- * @env: Envirment Variable
  * @c:Shell Excution Time Case of Command Not Found
  * Return: 1 Case Command Null -1 Wrong Command 0 Command Excuted
  */
-int check_cmd(char **cmd, char *input, char **env, int c)
+int check_cmd(char **cmd, char *input, int c)
 {
 	int status;
 	pid_t pid;
@@ -62,15 +61,13 @@ int check_cmd(char **cmd, char *input, char **env, int c)
 			path_cmd(cmd);
 		}
 
-		if (execve(*cmd, cmd, env) == -1)
+		if (execve(*cmd, cmd, environ) == -1)
 		{
 			print_error(cmd[0], c);
 			free(input);
 			free(cmd);
-			free_env(env);
 			exit(EXIT_FAILURE);
 		}
-		free_env(env);
 		return (EXIT_SUCCESS);
 	}
 	wait(&status);

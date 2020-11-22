@@ -10,7 +10,6 @@ void read_file(char *filename)
 	FILE *fp;
 	char *line = NULL;
 	size_t len = 0;
-	char *envi[50];
 	int counter = 0;
 
 	fp = fopen(filename, "r");
@@ -18,28 +17,25 @@ void read_file(char *filename)
 	{
 		exit(EXIT_FAILURE);
 	}
-	creat_envi(envi);
 	while ((getline(&line, &len, fp)) != -1)
 	{
 		counter++;
-		treat_file(line, envi, counter, fp);
+		treat_file(line, counter, fp);
 
 	}
 	if (line)
 		free(line);
-	free_env(envi);
 	fclose(fp);
 	exit(0);
 }
 /**
  * treat_file - PARSE Check Command Fork Wait Excute in Line of File
  * @line: Line From A File
- * @envi: Enviroment Variable
  * @counter:Error Counter
  * @fp:File Descriptor
  * Return : Excute A line void
  */
-void treat_file(char *line, char **envi, int counter, FILE *fp)
+void treat_file(char *line, int counter, FILE *fp)
 {
 	char **cmd;
 	int st = 0;
@@ -48,7 +44,7 @@ void treat_file(char *line, char **envi, int counter, FILE *fp)
 
 		if (_strncmp(cmd[0], "exit", 4) == 0)
 		{
-			exit_bul_for_file(cmd, line, envi, fp);
+			exit_bul_for_file(cmd, line, fp);
 		}
 		else if (check_builtin(cmd) == 0)
 		{
@@ -57,19 +53,18 @@ void treat_file(char *line, char **envi, int counter, FILE *fp)
 		}
 		else
 		{
-			st = check_cmd(cmd, line, envi, counter);
+			st = check_cmd(cmd, line, counter);
 			free(cmd);
 		}
 }
 /**
  * exit_bul_for_file - Exit Shell Case Of File
  * @line: Line From A File
- * @envi: Enviroment Variable
  * @cmd: Parsed Command
  * @fd:File Descriptor
  * Return : Case Of Exit in A File Line
  */
-void exit_bul_for_file(char **cmd, char *line, char **envi, FILE *fd)
+void exit_bul_for_file(char **cmd, char *line, FILE *fd)
 {
 	int statue, i = 0;
 
@@ -77,7 +72,6 @@ void exit_bul_for_file(char **cmd, char *line, char **envi, FILE *fd)
 	{
 		free(line);
 		free(cmd);
-		free_env(envi);
 		fclose(fd);
 		exit(errno);
 	}
@@ -91,7 +85,6 @@ void exit_bul_for_file(char **cmd, char *line, char **envi, FILE *fd)
 	statue = _atoi(cmd[1]);
 	free(line);
 	free(cmd);
-	free_env(envi);
 	fclose(fd);
 	exit(statue);
 

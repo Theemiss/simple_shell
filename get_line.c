@@ -3,10 +3,9 @@
 
 /**
 * _getline - Read The Input By User From Stdin
-* @envi: Enviroment Variable To Free Case Of ^D
 * Return: Input
 */
-char *_getline(char **envi)
+char *_getline()
 {
 int i, buffsize = BUFSIZE, rd;
 char c = 0;
@@ -25,7 +24,6 @@ char *buff = malloc(buffsize);
 		if (rd == 0)
 		{
 			free(buff);
-			free_env(envi);
 			exit(EXIT_SUCCESS);
 		}
 		buff[i] = c;
