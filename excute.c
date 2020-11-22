@@ -68,10 +68,10 @@ int check_cmd(char **cmd, char *input, char **env, int c)
 			free(input);
 			free(cmd);
 			free_env(env);
-			exit(-1);
+			exit(EXIT_FAILURE);
 		}
 		free_env(env);
-		return (0);
+		return (EXIT_SUCCESS);
 	}
 	wait(&status);
 	return (1);

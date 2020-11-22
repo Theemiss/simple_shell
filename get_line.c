@@ -8,7 +8,7 @@
 */
 char *_getline(char **envi)
 {
-int i, buffsize = 1024, rd;
+int i, buffsize = BUFSIZE, rd;
 char c = 0;
 char *buff = malloc(buffsize);
 

@@ -38,23 +38,23 @@ int path_cmd(char **cmd)
  */
 char *build(char *token, char *value)
 {
-	char *cmd_path;
-	size_t cmd_len;
+	char *cmd;
+	size_t len;
 
-	cmd_len = _strlen(value) + _strlen(token) + 2;
-	cmd_path = malloc(sizeof(char) * cmd_len);
-	if (!cmd_path)
+	len = _strlen(value) + _strlen(token) + 2;
+	cmd = malloc(sizeof(char) * len);
+	if (cmd == NULL)
 	{
 		return (NULL);
 	}
 
-	memset(cmd_path, 0, cmd_len);
+	memset(cmd, 0, len);
 
-	cmd_path = _strcat(cmd_path, value);
-	cmd_path = _strcat(cmd_path, "/");
-	cmd_path = _strcat(cmd_path, token);
+	cmd = _strcat(cmd, value);
+	cmd = _strcat(cmd, "/");
+	cmd = _strcat(cmd, token);
 
-	return (cmd_path);
+	return (cmd);
 }
 /**
  * _getenv - Gets The Value Of Enviroment Variable By Name
@@ -63,18 +63,17 @@ char *build(char *token, char *value)
  */
 char *_getenv(char *name)
 {
-	size_t namel;
-	size_t valuel;
+	size_t nl, vl;
 	char *value;
 	int i, x, j;
 
-	namel = _strlen(name);
+	nl = _strlen(name);
 	for (i = 0 ; environ[i]; i++)
 	{
-		if (_strncmp(name, environ[i], namel) == 0)
+		if (_strncmp(name, environ[i], nl) == 0)
 		{
-			valuel = _strlen(environ[i]) - namel;
-			value = malloc(sizeof(char) * valuel);
+			vl = _strlen(environ[i]) - nl;
+			value = malloc(sizeof(char) * vl);
 			if (!value)
 			{
 				free(value);
@@ -83,7 +82,7 @@ char *_getenv(char *name)
 			}
 
 			j = 0;
-			for (x = namel + 1; environ[i][x]; x++, j++)
+			for (x = nl + 1; environ[i][x]; x++, j++)
 			{
 				value[j] = environ[i][x];
 			}
