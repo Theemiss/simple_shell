@@ -56,7 +56,7 @@ int check_cmd(char **cmd, char *input, int c)
 
 	if (pid == 0)
 	{
-		if (_strncmp(*cmd, "./", 2) != 0)
+		if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
 		{
 			path_cmd(cmd);
 		}
