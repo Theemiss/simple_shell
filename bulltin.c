@@ -44,26 +44,14 @@ void  exit_bul(char **cmd, char *input, char **argv, int c)
 int change_dir(char **cmd, __attribute__((unused))int er)
 {
 	int value = -1;
-	char path[PATH_MAX];
 	char cwd[PATH_MAX];
 
-	if (cmd[1] == NULL || _strcmp(cmd[1], "~") == 0)
+	if (cmd[1] == NULL)
 		value = chdir(getenv("HOME"));
 	else if (_strcmp(cmd[1], "-") == 0)
 	{
 		chdir(getenv("OLDPWD"));
 		value = 0;
-	}
-	else if (_strcmp(cmd[1], "..") == 0)
-		value = chdir(cmd[1]);
-	else if (_strcmp(cmd[1], ".") == 0)
-		value = chdir(cmd[1]);
-	else if (cmd[1][0] != '/')
-	{
-		_strcpy(path, getenv("PWD"));
-		_strcat(path, "/");
-		_strcat(path, cmd[1]);
-		value = chdir(path);
 	}
 	else
 		value = chdir(cmd[1]);
