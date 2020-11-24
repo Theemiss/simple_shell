@@ -51,7 +51,6 @@ int change_dir(char **cmd, __attribute__((unused))int er)
 	else if (_strcmp(cmd[1], "-") == 0)
 	{
 		value = chdir(getenv("OLDPWD"));
-		
 	}
 	else
 		value = chdir(cmd[1]);
