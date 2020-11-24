@@ -45,7 +45,7 @@ int check_cmd(char **cmd, char *input, int c, char **argv)
 
 	if (*cmd == NULL)
 	{
-		return (1);
+		return (-1);
 	}
 
 	pid = fork();
@@ -72,7 +72,7 @@ int check_cmd(char **cmd, char *input, int c, char **argv)
 		return (EXIT_SUCCESS);
 	}
 	wait(&status);
-	return (1);
+	return (0);
 }
 /**
  * signal_to_handel - Handle ^C
