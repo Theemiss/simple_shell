@@ -13,19 +13,23 @@ void  exit_bul(char **cmd, char *input)
 	{
 		free(input);
 		free(cmd);
-		exit(errno);
+		exit(EXIT_SUCCESS);
 	}
 	while (cmd[1][i])
 	{
-		if (_isalpha(cmd[1][i++]) < 0)
+		if (_isalpha(cmd[1][i++]) != 0)
 		{
-			perror("illegal number");
+			PRINTER("illegal number\n");
+			break;
+		}
+		else
+		{
+			statue = _atoi(cmd[1]);
+			free(input);
+			free(cmd);
+			exit(statue);
 		}
 	}
-	statue = _atoi(cmd[1]);
-	free(input);
-	free(cmd);
-	exit(statue);
 }
 
 
