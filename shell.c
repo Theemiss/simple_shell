@@ -10,7 +10,7 @@
 int main(__attribute__((unused)) int argc, char **argv)
 {
 	char *input, **cmd;
-	int counter = 0, statue = 1, st;
+	int counter = 0, statue = 1, st = 0;
 
 	if (argv[1] != NULL)
 		read_file(argv[1], argv);
@@ -25,7 +25,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			continue;
 		}
-		st = history(input);
+		history(input);
 		cmd = parse_cmd(input);
 		if (_strcmp(cmd[0], "exit") == 0)
 		{
