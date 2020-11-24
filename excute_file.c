@@ -2,10 +2,11 @@
 /**
  * read_file - Read Command From File
  * @filename:Filename
+ * @argv:Program Name
  * Return: -1 or  0
  */
 
-void read_file(char *filename)
+void read_file(char *filename, char **argv)
 {
 	FILE *fp;
 	char *line = NULL;
@@ -20,7 +21,7 @@ void read_file(char *filename)
 	while ((getline(&line, &len, fp)) != -1)
 	{
 		counter++;
-		treat_file(line, counter, fp);
+		treat_file(line, counter, fp, argv);
 
 	}
 	if (line)
@@ -33,9 +34,10 @@ void read_file(char *filename)
  * @line: Line From A File
  * @counter:Error Counter
  * @fp:File Descriptor
+ * @argv:Program Name
  * Return : Excute A line void
  */
-void treat_file(char *line, int counter, FILE *fp)
+void treat_file(char *line, int counter, FILE *fp, char **argv)
 {
 	char **cmd;
 	int st = 0;
@@ -53,7 +55,7 @@ void treat_file(char *line, int counter, FILE *fp)
 		}
 		else
 		{
-			st = check_cmd(cmd, line, counter);
+			st = check_cmd(cmd, line, counter, argv);
 			free(cmd);
 		}
 }

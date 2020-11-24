@@ -35,9 +35,10 @@ int handle_builtin(char **cmd, int er)
  * @cmd:Parsed Command
  * @input: User Input
  * @c:Shell Excution Time Case of Command Not Found
+ * @argv:Program Name
  * Return: 1 Case Command Null -1 Wrong Command 0 Command Excuted
  */
-int check_cmd(char **cmd, char *input, int c)
+int check_cmd(char **cmd, char *input, int c, char **argv)
 {
 	int status;
 	pid_t pid;
@@ -63,7 +64,7 @@ int check_cmd(char **cmd, char *input, int c)
 
 		if (execve(*cmd, cmd, environ) == -1)
 		{
-			print_error(cmd[0], c);
+			print_error(cmd[0], c, argv);
 			free(input);
 			free(cmd);
 			exit(EXIT_FAILURE);

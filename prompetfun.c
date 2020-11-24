@@ -5,25 +5,20 @@
  */
 void prompt(void)
 {
-	char *prom = getenv("USER");
-	char *cwd = getenv("PWD");
-
-	PRINTER(prom);
-	PRINTER(":~");
-	PRINTER(cwd);
 	PRINTER("$ ");
 }
 /**
  * print_error - Display Error Based on Command and How Many Time Shell Looped
  * @input:User Input
  * @counter:Simple Shell Count Loop
+ * @argv:Program Name
  * Return: Void
  */
-void print_error(char *input, int counter)
+void print_error(char *input, int counter, char **argv)
 {
 	char *er;
 
-	PRINTER("hsh");
+	PRINTER(argv[0]);
 	PRINTER(": ");
 	er = _itoa(counter);
 	PRINTER(er);

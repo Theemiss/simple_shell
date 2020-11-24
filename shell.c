@@ -13,7 +13,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 	int counter = 0, statue = 1, st;
 
 	if (argv[1] != NULL)
-		read_file(argv[1]);
+		read_file(argv[1], argv);
 	signal(SIGINT, signal_to_handel);
 	while (statue)
 	{
@@ -40,7 +40,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		}
 		else
 		{
-			st = check_cmd(cmd, input, counter);
+			st = check_cmd(cmd, input, counter, argv);
 
 		}
 		free_all(cmd, input);

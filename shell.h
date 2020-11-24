@@ -70,12 +70,12 @@ int path_cmd(char **line);
 char *_getenv(char *name);
 char **parse_cmd(char *cmd);
 int handle_builtin(char **cmd, int er);
-void read_file(char *argv);
+void read_file(char *filename, char **argv);
 char *build(char *token, char *value);
 int check_builtin(char **cmd);
 void creat_envi(char **envi);
-int check_cmd(char **tokens, char *line, int count);
-void treat_file(char *line, int counter, FILE *fd);
+int check_cmd(char **tokens, char *line, int count, char **argv);
+void treat_file(char *line, int counter, FILE *fd, char **argv);
 void exit_bul_for_file(char **cmd, char *line, FILE *fd);
 
 /** ####BUL FUNC #####*/
@@ -93,7 +93,7 @@ int print_echo(char **cmd);
 /** ####error handle and Printer ####*/
 void print_number(unsigned int n);
 void print_number_in(int n);
-void print_error(char *line, int c);
+void print_error(char *line, int c, char **argv);
 
 /**
  * struct bulltin - contain bultin to handle and function to excute
