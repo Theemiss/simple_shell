@@ -50,8 +50,8 @@ int change_dir(char **cmd, __attribute__((unused))int er)
 		value = chdir(getenv("HOME"));
 	else if (_strcmp(cmd[1], "-") == 0)
 	{
-		chdir(getenv("OLDPWD"));
-		value = 0;
+		value = chdir(getenv("OLDPWD"));
+		
 	}
 	else
 		value = chdir(cmd[1]);
