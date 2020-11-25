@@ -1,4 +1,4 @@
-.TH man 3 "20 November 2020" "0.20" "HSH man page"
+.TH man 1 "20 November 2020" "0.20" "HSH man page"
 .SH NAME
 .B hsh 
 - Simple Shell Studying purpose Holberton School
@@ -78,8 +78,12 @@ directory.
 .SH SHELL BUILTIN COMMANDS
 The commands 
 .B exit
-and 
+,
 .B env
+,
+.B help
+and
+.B echo
 are handled automatically by 
 .B hsh
 
